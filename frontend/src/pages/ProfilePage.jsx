@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { useProfileMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
-import { useGetMyOrdersQuery } from "../slices/ordersApiSlice";
-import { Table, Form, Button, Row, Col } from "react-bootstrap";
-import { FaTimes } from "react-icons/fa";
-import { toast } from "react-toastify";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { useProfileMutation } from "../slices/usersApiSlice"
+import { setCredentials } from "../slices/authSlice"
+import { useGetMyOrdersQuery } from "../slices/ordersApiSlice"
+import { Table, Form, Button, Row, Col } from "react-bootstrap"
+import { FaTimes } from "react-icons/fa"
+import { toast } from "react-toastify"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
 
 const ProfilePage = () => {
   const [data, setData] = useState({
@@ -16,37 +16,37 @@ const ProfilePage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-  });
-  const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.auth);
+  })
+  const dispatch = useDispatch()
+  const { userInfo } = useSelector((state) => state.auth)
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
-    useProfileMutation();
-  const { data: orders, isLoading, error } = useGetMyOrdersQuery();
+    useProfileMutation()
+  const { data: orders, isLoading, error } = useGetMyOrdersQuery()
   useEffect(() => {
     if (userInfo) {
-      setData({ ...userInfo, password: "", confirmPassword: "" });
+      setData({ ...userInfo, password: "", confirmPassword: "" })
     }
-  }, [userInfo]);
+  }, [userInfo])
   const changeHandler = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+    setData({ ...data, [e.target.name]: e.target.value })
+  }
   const submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (data.password !== data.confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error("Passwords do not match")
     } else {
       try {
         const res = await updateProfile({
           ...data,
           _id: userInfo._id,
-        }).unwrap();
-        dispatch(setCredentials(res));
-        toast.success("Profile updated successfully");
+        }).unwrap()
+        dispatch(setCredentials(res))
+        toast.success("Profile updated successfully")
       } catch (error) {
-        toast.error(error.data.message || error.error);
+        toast.error(error.data.message || error.error)
       }
     }
-  };
+  }
   return (
     <Row>
       <Col md={3}>
@@ -155,7 +155,7 @@ const ProfilePage = () => {
         )}
       </Col>
     </Row>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage

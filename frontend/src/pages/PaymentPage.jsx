@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
-import CheckoutSteps from "../components/CheckoutSteps";
-import { savePaymentMethod } from "../slices/cartSlice";
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { Form, Row, Col, Button } from "react-bootstrap"
+import FormContainer from "../components/FormContainer"
+import CheckoutSteps from "../components/CheckoutSteps"
+import { savePaymentMethod } from "../slices/cartSlice"
 
 const PaymentPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { shippingAddress } = useSelector((state) => state.cart);
-  const [paymentMethod, setPaymentMethod] = useState("Paypal");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { shippingAddress } = useSelector((state) => state.cart)
+  const [paymentMethod, setPaymentMethod] = useState("PayNow")
   useEffect(() => {
     if (!shippingAddress) {
-      navigate("/shipping");
+      navigate("/shipping")
     }
-  }, [shippingAddress, navigate]);
+  }, [shippingAddress, navigate])
   const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeorder");
-  };
+    e.preventDefault()
+    dispatch(savePaymentMethod(paymentMethod))
+    navigate("/placeorder")
+  }
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
@@ -32,10 +32,10 @@ const PaymentPage = () => {
             <Form.Check
               type="radio"
               className="my-2"
-              label="Paypal or Credit Card"
-              id="PayPal"
+              label="PayNow"
+              id="PayNow"
               name="paymentMethod"
-              value="Paypal"
+              value="PayNow"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
@@ -46,7 +46,7 @@ const PaymentPage = () => {
         </Button>
       </Form>
     </FormContainer>
-  );
-};
+  )
+}
 
-export default PaymentPage;
+export default PaymentPage
