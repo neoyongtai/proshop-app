@@ -35,7 +35,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to="https://wa.me/89280850">
+              <Nav.Link as={Link} to="https://wa.me/6589280850">
                 <IoChatboxOutline /> Chat
               </Nav.Link>
               <Nav.Link as={Link} to="mailto:hannazhu@yahoo.com">
